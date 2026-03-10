@@ -1,0 +1,54 @@
+---
+import { client } from '../lib/sanity';
+import type { Settings } from '../lib/types';
+
+const settings: Settings | null = await client.fetch(`*[_type == "settings"][0]`).catch(() => null);
+const email = settings?.email ?? 'amadeus@example.com';
+const soundcloud = settings?.soundcloudUrl ?? 'https://soundcloud.com/amadeus-wedberg';
+const instagram = settings?.instagramUrl;
+---
+
+<footer id="contact" class="bg-jazz-dark border-t border-jazz-border py-20">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+
+    <h2 class="font-serif text-jazz-warm text-3xl md:text-4xl font-normal italic mb-2">
+      Let's Play
+    </h2>
+    <p class="text-jazz-gold text-xs tracking-[0.4em] uppercase font-light mb-10">Contact</p>
+
+    <a
+      href={`mailto:${email}`}
+      class="text-jazz-muted hover:text-jazz-gold text-sm font-light tracking-wide transition-colors"
+    >
+      {email}
+    </a>
+
+    <!-- Social links -->
+    <div class="flex justify-center gap-8 mt-10">
+      <a
+        href={soundcloud}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-[10px] tracking-widest uppercase text-jazz-muted hover:text-jazz-gold transition-colors font-light"
+      >
+        SoundCloud
+      </a>
+      {instagram && (
+        <a
+          href={instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[10px] tracking-widest uppercase text-jazz-muted hover:text-jazz-gold transition-colors font-light"
+        >
+          Instagram
+        </a>
+      )}
+    </div>
+
+    <div class="w-12 h-px bg-jazz-border mx-auto mt-14 mb-8"></div>
+
+    <p class="text-jazz-muted text-[10px] tracking-widest uppercase font-light">
+      &copy; {new Date().getFullYear()} Amadeus Wedberg
+    </p>
+  </div>
+</footer>

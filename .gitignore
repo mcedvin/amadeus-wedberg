@@ -17,6 +17,10 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Sanity Studio generated files
+studio/.sanity/
+studio/dist/
+
 # macOS-specific files
 .DS_Store
 

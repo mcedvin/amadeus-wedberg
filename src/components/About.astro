@@ -1,0 +1,67 @@
+---
+import { client, urlFor } from '../lib/sanity';
+import type { Settings } from '../lib/types';
+
+const settings: Settings | null = await client.fetch(`*[_type == "settings"][0]`).catch(() => null);
+
+const fallbackBio = [
+  "Amadeus Wedberg is a Stockholm-based jazz drummer known for his nuanced touch, deep rhythmic feel, and musical sensitivity.",
+  "Drawing from a wide range of influences — from the American jazz tradition to contemporary Scandinavian sounds — he brings both technical precision and expressive freedom to every performance.",
+  "Amadeus is active as a bandleader, sideman, and session musician, collaborating with some of Sweden's most exciting jazz artists."
+];
+---
+
+<section id="about" class="py-24 md:py-36 bg-jazz-dark">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+      <!-- Photo -->
+      <div class="relative order-2 md:order-1">
+        {settings?.profilePhoto ? (
+          <img
+            src={urlFor(settings.profilePhoto).width(700).height(900).fit('crop').url()}
+            alt="Amadeus Wedberg"
+            class="w-full max-w-sm mx-auto md:mx-0 object-cover grayscale hover:grayscale-0 transition-all duration-700"
+          />
+        ) : (
+          <img
+            src="/amadeus-hero.jpg"
+            alt="Amadeus Wedberg"
+            class="w-full max-w-sm mx-auto md:mx-0 object-cover grayscale hover:grayscale-0 transition-all duration-700"
+          />
+        )}
+        <div class="absolute -bottom-4 -right-4 md:-right-4 w-24 h-24 border border-jazz-gold opacity-30"></div>
+      </div>
+
+      <!-- Text -->
+      <div class="order-1 md:order-2">
+        <p class="text-jazz-gold text-xs tracking-[0.4em] uppercase font-light mb-4">About</p>
+        <h2 class="font-serif text-jazz-warm text-3xl md:text-4xl font-normal italic mb-2">
+          The Musician
+        </h2>
+        <div class="w-12 h-px bg-jazz-gold mb-8"></div>
+
+        <div class="space-y-5 text-jazz-muted leading-relaxed font-light text-[0.95rem]">
+          {settings?.bio
+            ? settings.bio.map((block: any) => (
+                block._type === 'block' && block.children && (
+                  <p>{block.children.map((child: any) => child.text).join('')}</p>
+                )
+              ))
+            : fallbackBio.map(p => <p>{p}</p>)
+          }
+        </div>
+
+        {settings?.email && (
+          <a
+            href={`mailto:${settings.email}`}
+            class="inline-block mt-10 text-xs tracking-widest uppercase text-jazz-gold border border-jazz-gold px-6 py-3 hover:bg-jazz-gold hover:text-jazz-black transition-all duration-200 font-light"
+          >
+            Get in Touch
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

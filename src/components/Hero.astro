@@ -1,0 +1,39 @@
+---
+---
+
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background photo -->
+  <div class="absolute inset-0">
+    <img
+      src="/amadeus-hero.jpg"
+      alt="Amadeus Wedberg playing drums"
+      class="w-full h-full object-cover object-center"
+    />
+    <!-- Dark gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-jazz-black/60 via-jazz-black/40 to-jazz-black"></div>
+    <div class="absolute inset-0 bg-jazz-black/30"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 text-center px-6">
+    <p class="text-jazz-gold text-xs tracking-[0.4em] uppercase font-light mb-6">
+      Jazz Drummer
+    </p>
+    <h1 class="font-serif text-jazz-warm text-5xl md:text-7xl lg:text-8xl font-normal leading-tight">
+      Amadeus<br />
+      <span class="italic font-light">Wedberg</span>
+    </h1>
+    <div class="mt-8 w-16 h-px bg-jazz-gold mx-auto"></div>
+    <p class="mt-6 text-jazz-muted text-sm tracking-widest uppercase font-light">
+      Stockholm
+    </p>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+    <span class="text-jazz-muted text-xs tracking-widest uppercase font-light">Scroll</span>
+    <svg class="w-4 h-4 text-jazz-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
+</section>
