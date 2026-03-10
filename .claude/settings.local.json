@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx astro:*)",
+      "Bash(npm run:*)",
+      "Bash(npx sanity:*)",
+      "Bash(git rm:*)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git commit:*)",
+      "Bash(gh --version)"
+    ]
+  }
+}
