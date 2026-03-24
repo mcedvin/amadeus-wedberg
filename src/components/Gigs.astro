@@ -11,69 +11,63 @@ const formatDate = (dateStr: string) => {
   return {
     day: date.toLocaleDateString('en-SE', { day: '2-digit' }),
     month: date.toLocaleDateString('en-SE', { month: 'short' }).toUpperCase(),
-    year: date.getFullYear(),
     weekday: date.toLocaleDateString('en-SE', { weekday: 'long' }),
   };
 };
 ---
 
-<section id="live" class="py-24 md:py-36 bg-jazz-dark">
+<section id="live" class="py-24 md:py-36 bg-n-white">
   <div class="max-w-4xl mx-auto px-6">
 
     <div class="text-center mb-16">
-      <p class="text-jazz-gold text-xs tracking-[0.4em] uppercase font-light mb-4">Upcoming</p>
-      <h2 class="font-serif text-jazz-warm text-3xl md:text-4xl font-normal italic">
-        Live
-      </h2>
-      <div class="w-12 h-px bg-jazz-gold mx-auto mt-6"></div>
+      <p class="text-n-clay text-xs tracking-[0.4em] uppercase font-light mb-4">Upcoming</p>
+      <h2 class="font-serif text-n-ink text-3xl md:text-4xl font-normal italic">Live</h2>
+      <div class="w-8 h-px bg-n-stone mx-auto mt-6"></div>
     </div>
 
     {gigs.length > 0 ? (
-      <ul class="space-y-px list-none">
+      <ul class="list-none divide-y divide-n-stone">
         {gigs.map((gig) => {
           const d = formatDate(gig.date);
           return (
-            <li class="border border-jazz-border hover:border-jazz-gold group transition-colors duration-200">
-              <div class="flex items-center gap-6 px-6 py-5">
-                <!-- Date block -->
-                <div class="text-center min-w-[3rem]">
-                  <div class="font-serif text-jazz-gold text-2xl font-normal leading-none">{d.day}</div>
-                  <div class="text-jazz-muted text-[10px] tracking-widest uppercase font-light mt-1">{d.month}</div>
+            <li class="group flex items-center gap-6 py-6">
+              <!-- Date -->
+              <div class="text-center min-w-[2.5rem]">
+                <div class="font-serif text-n-ink text-2xl font-normal leading-none">{d.day}</div>
+                <div class="text-n-fog text-[10px] tracking-widest uppercase font-light mt-1">{d.month}</div>
+              </div>
+
+              <div class="w-px h-8 bg-n-stone"></div>
+
+              <!-- Info -->
+              <div class="flex-1 min-w-0">
+                <div class="font-serif text-n-ink text-lg">{gig.venue}</div>
+                <div class="text-n-fog text-xs tracking-wide font-light mt-0.5">
+                  {gig.city}{gig.country ? `, ${gig.country}` : ''} &mdash; {d.weekday}
                 </div>
-
-                <div class="w-px h-10 bg-jazz-border group-hover:bg-jazz-gold transition-colors"></div>
-
-                <!-- Info -->
-                <div class="flex-1 min-w-0">
-                  <div class="font-serif text-jazz-warm text-lg font-normal">{gig.venue}</div>
-                  <div class="text-jazz-muted text-xs tracking-wider font-light mt-0.5">
-                    {gig.city}{gig.country ? `, ${gig.country}` : ''} &mdash; {d.weekday}
-                  </div>
-                  {gig.description && (
-                    <div class="text-jazz-muted text-xs mt-1 font-light">{gig.description}</div>
-                  )}
-                </div>
-
-                <!-- Ticket link -->
-                {gig.ticketUrl && (
-                  <a
-                    href={gig.ticketUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-[10px] tracking-widest uppercase text-jazz-gold border border-jazz-gold/40 px-4 py-2 hover:bg-jazz-gold hover:text-jazz-black transition-all duration-200 font-light shrink-0"
-                  >
-                    Tickets
-                  </a>
+                {gig.description && (
+                  <div class="text-n-fog text-xs mt-1 font-light italic">{gig.description}</div>
                 )}
               </div>
+
+              {gig.ticketUrl && (
+                <a
+                  href={gig.ticketUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-[10px] tracking-widest uppercase text-n-ink border border-n-ink px-4 py-2 hover:bg-n-ink hover:text-n-white transition-all duration-200 font-light shrink-0"
+                >
+                  Tickets
+                </a>
+              )}
             </li>
           );
         })}
       </ul>
     ) : (
-      <div class="text-center py-16 border border-jazz-border">
-        <p class="text-jazz-muted font-serif italic text-lg">No upcoming dates.</p>
-        <p class="text-jazz-muted text-xs tracking-widest uppercase font-light mt-2">Check back soon</p>
+      <div class="text-center py-16 border border-n-stone">
+        <p class="text-n-fog font-serif italic text-lg">No upcoming dates.</p>
+        <p class="text-n-fog text-xs tracking-widest uppercase font-light mt-2">Check back soon</p>
       </div>
     )}
 

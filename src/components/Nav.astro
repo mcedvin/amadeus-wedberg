@@ -1,27 +1,39 @@
 ---
-const links = [
+const left = [
   { label: 'About', href: '#about' },
   { label: 'Listen', href: '#listen' },
   { label: 'Live', href: '#live' },
+];
+const right = [
   { label: 'Gallery', href: '#gallery' },
   { label: 'Contact', href: '#contact' },
 ];
 ---
 
-<nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
-    <a href="#" class="font-serif text-jazz-warm text-lg tracking-widest uppercase hover:text-jazz-gold transition-colors">
+<nav id="nav" class="fixed top-0 left-0 right-0 z-50 bg-n-white/90 backdrop-blur-sm border-b border-n-stone transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <!-- Left links (desktop) -->
+    <ul class="hidden md:flex gap-8 list-none flex-1">
+      {left.map(link => (
+        <li>
+          <a href={link.href} class="text-n-fog hover:text-n-ink text-xs tracking-widest uppercase transition-colors duration-200 font-light">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Centered name -->
+    <a href="#" class="font-serif text-n-ink text-base md:text-lg tracking-[0.2em] uppercase absolute left-1/2 -translate-x-1/2">
       Amadeus Wedberg
     </a>
 
-    <!-- Desktop links -->
-    <ul class="hidden md:flex gap-8 list-none">
-      {links.map(link => (
+    <!-- Right links (desktop) -->
+    <ul class="hidden md:flex gap-8 list-none flex-1 justify-end">
+      {right.map(link => (
         <li>
-          <a
-            href={link.href}
-            class="text-jazz-muted hover:text-jazz-gold text-sm tracking-widest uppercase transition-colors duration-200 font-light"
-          >
+          <a href={link.href} class="text-n-fog hover:text-n-ink text-xs tracking-widest uppercase transition-colors duration-200 font-light">
             {link.label}
           </a>
         </li>
@@ -29,29 +41,19 @@ const links = [
     </ul>
 
     <!-- Mobile hamburger -->
-    <button
-      id="menu-toggle"
-      class="md:hidden flex flex-col gap-1.5 p-2"
-      aria-label="Toggle menu"
-    >
-      <span class="block w-6 h-px bg-jazz-warm transition-all duration-300" id="bar1"></span>
-      <span class="block w-6 h-px bg-jazz-warm transition-all duration-300" id="bar2"></span>
-      <span class="block w-4 h-px bg-jazz-warm transition-all duration-300" id="bar3"></span>
+    <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2 ml-auto" aria-label="Toggle menu">
+      <span class="block w-6 h-px bg-n-ink transition-all duration-300"></span>
+      <span class="block w-6 h-px bg-n-ink transition-all duration-300"></span>
+      <span class="block w-4 h-px bg-n-ink transition-all duration-300" id="bar3"></span>
     </button>
   </div>
 
   <!-- Mobile menu -->
-  <div
-    id="mobile-menu"
-    class="hidden md:hidden bg-jazz-dark border-t border-jazz-border"
-  >
+  <div id="mobile-menu" class="hidden md:hidden bg-n-white border-t border-n-stone">
     <ul class="flex flex-col list-none px-6 py-4 gap-4">
-      {links.map(link => (
+      {[...left, ...right].map(link => (
         <li>
-          <a
-            href={link.href}
-            class="mobile-link text-jazz-muted hover:text-jazz-gold text-sm tracking-widest uppercase transition-colors font-light block py-1"
-          >
+          <a href={link.href} class="mobile-link text-n-fog hover:text-n-ink text-xs tracking-widest uppercase transition-colors font-light block py-1">
             {link.label}
           </a>
         </li>
@@ -61,32 +63,16 @@ const links = [
 </nav>
 
 <script>
-  const nav = document.getElementById('nav')!;
   const toggle = document.getElementById('menu-toggle')!;
   const mobileMenu = document.getElementById('mobile-menu')!;
   const bar3 = document.getElementById('bar3')!;
 
-  // Blur nav on scroll
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      nav.style.backgroundColor = 'rgba(10,10,10,0.85)';
-      nav.style.backdropFilter = 'blur(12px)';
-      nav.style.borderBottom = '1px solid #2a2a2a';
-    } else {
-      nav.style.backgroundColor = 'transparent';
-      nav.style.backdropFilter = 'none';
-      nav.style.borderBottom = 'none';
-    }
-  });
-
-  // Mobile menu toggle
   toggle.addEventListener('click', () => {
     const isOpen = !mobileMenu.classList.contains('hidden');
     mobileMenu.classList.toggle('hidden', isOpen);
     bar3.style.width = isOpen ? '1rem' : '1.5rem';
   });
 
-  // Close mobile menu on link click
   document.querySelectorAll('.mobile-link').forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.add('hidden');
